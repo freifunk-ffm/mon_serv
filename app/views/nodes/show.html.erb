@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Ip address:</b>
+  <%= @node.ip_address %>
+</p>
+
+<p>
+  <b>Alert addresses:</b>
+  <%= @node.alert_addresses %>
+</p>
+
+
+<%= link_to 'Edit', edit_node_path(@node) %> |
+<%= link_to 'Back', nodes_path %>

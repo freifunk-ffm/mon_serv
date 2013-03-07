@@ -1,0 +1,6 @@
+collectd:
+  reload_cmd: 'echo /etc/init.d/collectd_reload'
+  ping:
+    template: './lib/collectd/templates/ping.conf.erb'
+    path: '/tmp/ping_hosts.conf'
+    

@@ -42,7 +42,7 @@ class NodesController < ApplicationController
   # POST /nodes.json
   def create
     @node = Node.new(params[:node])
-    @node.id = id_str.params[:node][:id]
+    @node.id = params[:node][:id]
     respond_to do |format|
       if @node.save
         format.html { redirect_to @node, notice: 'Node was successfully created.' }

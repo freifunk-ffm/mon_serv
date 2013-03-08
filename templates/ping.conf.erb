@@ -1,0 +1,7 @@
+<Plugin "ping">
+        Interval 10
+        Timeout 5
+	<% for addr in addresses  do %> 
+		Host "<%= addr %>%eth1"	
+	<% end %>
+</Plugin>

@@ -1,0 +1,6 @@
+collectd:
+  reload_cmd: 'echo /etc/init.d/collectd_reload'
+  ping:
+    template: '/srv/mon_serv/templates/ping.conf.erb'
+    path: '/etc/collectd/mesh-conf/ping.conf'
+    

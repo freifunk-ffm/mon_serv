@@ -9,7 +9,7 @@ my @params = ();
 opendir(DIR, $dir) or die $!;
 while (my $file = readdir(DIR)) {
 	if($file =~ /$pattern/){
-		push(@params,"-F \"mac[]=$1\"");
+		push(@params,"\"-F mac[]=$1\"");
 	} 
 }
 my $param_str = join(" ",@params);

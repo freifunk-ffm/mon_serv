@@ -1,5 +1,9 @@
 MonServ::Application.routes.draw do
-  resources :nodes
+  resources :nodes do
+    collection do
+      post 'add_macs'
+    end
+  end
 
 
   # The priority is based upon order of creation:

@@ -81,4 +81,20 @@ class NodesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  ## Add macs, if not existing
+  def add_macs
+     param[:mac].each do |mac_str|
+     mac = mac_str.to_i(16)
+     unless Node.find(mac)
+       n = Node.new
+       n.id = mac
+       begin
+         n.save!
+       rescue Exception => e
+         logger.error "Node #{mac} / #{mac_str} cannot be added #{e}"
+       end
+     end
+   end
+ end
 end

@@ -1,11 +1,12 @@
 MonServ::Application.routes.draw do
   resources :nodes do
+    resources :stats
     collection do
       post 'add_macs'
     end
   end
-
-
+  match 'nodes/:node_id/stats/:plugin/:name' => 'stats#show'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

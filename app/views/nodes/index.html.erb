@@ -2,8 +2,9 @@
 
 <table>
   <tr>
-    <th>Ip address</th>
-    <th>Alert addresses</th>
+	<th>id</th>
+	<th>mac</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,11 +12,14 @@
 
 <% @nodes.each do |node| %>
   <tr>
-    <td><%= node.ip_address %></td>
-    <td><%= node.alert_addresses %></td>
+	<td><%= node.id%></td>
+	<td><%= node.id.to_s(16)%>
+	<td><%= link_to 'Stats', node_stats_path(node)%>
     <td><%= link_to 'Show', node %></td>
-    <td><%= link_to 'Edit', edit_node_path(node) %></td>
     <td><%= link_to 'Destroy', node, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<td>
+		<img src="/nodes/110432246001710/stats/ping.png" />
+	</td>
   </tr>
 <% end %>
 </table>

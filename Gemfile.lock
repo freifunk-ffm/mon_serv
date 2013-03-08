@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/square/simplerrd.git
+  revision: 408bda4f37169a95c41a10470b206a4d387ca58c
+  specs:
+    simplerrd (0.11.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -112,5 +118,6 @@ DEPENDENCIES
   netaddr
   rails (= 3.2.12)
   sass-rails (~> 3.2.3)
+  simplerrd!
   sqlite3
   uglifier (>= 1.0.3)

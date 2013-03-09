@@ -2,11 +2,8 @@
 
 <table>
   <tr>
-	<th>id</th>
-	<th>mac</th>
-    <th></th>
-    <th></th>
-    <th></th>
+	<th>ID</th>
+	<th>Node-ID</th>
     <th></th>
   </tr>
 
@@ -14,12 +11,7 @@
   <tr>
 	<td><%= node.id%></td>
 	<td><%= node.id.to_s(16)%>
-	<td><%= link_to 'Stats', node_stats_path(node)%>
-    <td><%= link_to 'Show', node %></td>
-    <td><%= link_to 'Destroy', node, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-	<td>
-		<img src="/nodes/110432246001710/stats/ping.png" />
-	</td>
+	<td><%= link_to 'Stats', node_path(node)%>
   </tr>
 <% end %>
 </table>

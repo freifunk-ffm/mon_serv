@@ -38,10 +38,12 @@ gem 'jquery-rails'
 # gem 'debugger'
 gem 'bcrypt-ruby'
 gem 'netaddr'
-<<<<<<< Updated upstream
 gem 'simplerrd', :git => 'https://github.com/square/simplerrd.git'
+<<<<<<< HEAD
 #gem 'RRD'
 #gem 'weekling'
-=======
 gem 'therubyracer'
->>>>>>> Stashed changes
+=======
+#gem 'librrd'
+#gem 'weekling'
+>>>>>>> e11650f365741ee6b32c2293005c9b80b7b22738

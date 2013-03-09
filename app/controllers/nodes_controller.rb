@@ -15,7 +15,13 @@ class NodesController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @nodes }
+      format.json do render json: @nodes.map {|n| 
+        {:id => n.id, 
+          :node_id => n.id.to_s(16),
+          :loss_5_min => @loss[node],
+          :rtt_5_min => @rtt[node]}  
+        } 
+      end
     end
   end
 

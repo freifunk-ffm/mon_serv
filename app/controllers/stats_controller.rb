@@ -19,12 +19,14 @@ class StatsController < ApplicationController
     conf = Collectd.new
     node = Node.find(params[:node_id])
     secs = (params[:secs] || 3600).to_i
-     
+    name = params[:name]
+    width = params[:width] || 600
+    height = params[:height] || 200
     cn = CollectdNode.new(node.id.to_s(16),node.link_local_address,)
     #path = conf.rrd_path(params[:plugin],params[:name],cn)
     respond_to do |format|
       #format.rrd {send_file path, :type=>"application/rrd"}
-      format.png {send_data conf.ping_stat(cn).create_ping_graph(600,200,secs), :type => 'image/png',:disposition => 'inline'}
+      format.png {send_data conf.ping_stat(cn).create_ping_graph(width,height,secs), :type => 'image/png',:disposition => 'inline'}
     end
   end
 end

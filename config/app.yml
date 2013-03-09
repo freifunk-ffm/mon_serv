@@ -9,7 +9,7 @@ collectd:
 
   stats:
     ping: #Configuration for ping-graphs
-      dir: '/Users/jan/freifunk/mon_serv/rrd/collecd.kbu.freifunk.net'
+      dir: '/var/lib/collectd/rrd/collecd.kbu.freifunk.net'
       address: '<%= node.link_local %>%eth1.rrd'  
  
     

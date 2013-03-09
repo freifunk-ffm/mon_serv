@@ -5,6 +5,7 @@
 	<th>ID</th>
 	<th>Node-ID</th>
 	<th>RTT</th>
+	<th>Loss</th>
     <th></th>
   </tr>
 
@@ -13,6 +14,7 @@
 	<td><%= node.id%></td>
 	<td><%= node.id.to_s(16)%></td>
 	<td><%= @rtt[node].inspect%></td>
+	<td><%= @loss[node].inspect%></td>
 	
 	<td><%= link_to 'Stats', node_path(node)%></td>
   </tr>

@@ -1,16 +1,11 @@
 collectd:
-<<<<<<< Updated upstream
   #Executed after config-change
-  reload_cmd: 'echo /etc/init.d/collectd_reload'
-  
-  # Generate Ping-Configuration
+  reload_cmd: 'sudo /etc/init.d/collectd restart'
   ping:
-    template: './lib/collectd/templates/ping.conf.erb'
-    path: '/tmp/ping_hosts.conf'
-
+    template: '/srv/mon_serv/templates/ping.conf.erb'
+    path: '/etc/collectd/mesh-conf/ping.conf'
   stats:
     ping: #Configuration for ping-graphs
       dir: '/var/lib/collectd/rrd/collecd.kbu.freifunk.net'
       address: '<%= node.link_local %>%eth1.rrd'  
- 
     

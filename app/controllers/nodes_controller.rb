@@ -5,11 +5,12 @@ class NodesController < ApplicationController
   def index
     @nodes = Node.all
     @rtt = {}
+    @loss = {}
     conf = Collectd.new
     @nodes.each do |node|
       collectd_node = CollectdNode.new(node.id.to_s(16),node.link_local_address)
-      @rtt[node] = conf.ping_stat(collectd_node).rtt_5_min(Time.now - 3600)
-      @loss[node] = conf.ping_stat(collectd_node).loss_5_min(Time.now - 3600)
+      @rtt[node] = conf.ping_stat(collectd_node).rtt_5_min
+      @loss[node] = conf.ping_stat(collectd_node).loss_5_min
     end
     
     respond_to do |format|

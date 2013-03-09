@@ -4,14 +4,17 @@
   <tr>
 	<th>ID</th>
 	<th>Node-ID</th>
+	<th>RTT</th>
     <th></th>
   </tr>
 
 <% @nodes.each do |node| %>
   <tr>
 	<td><%= node.id%></td>
-	<td><%= node.id.to_s(16)%>
-	<td><%= link_to 'Stats', node_path(node)%>
+	<td><%= node.id.to_s(16)%></td>
+	<td><%= @rtt[node].inspect%></td>
+	
+	<td><%= link_to 'Stats', node_path(node)%></td>
   </tr>
 <% end %>
 </table>

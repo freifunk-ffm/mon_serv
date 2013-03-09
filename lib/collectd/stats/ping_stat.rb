@@ -1,4 +1,4 @@
-require 'simplerrd'
+require 'errand'
 
 class PingStat
   include SimpleRRD
@@ -24,10 +24,8 @@ class PingStat
   end
   
   def rtt(end_time)
-    start = end_time.to_i
-    endt = Time.now.to_i
-    res = (endt - start).to_i
-    "rrdtool fetch #{self.rtt_rrd} --start #{start.to_s} --end #{endt.to_s} --resolution #{res.to_s} AVERAGE"
+    rrd = Errand.new(:filename => rtt_rrd)
+    rrd.fetch(:start => Time.now - 300) #5 min back
   end
   
   

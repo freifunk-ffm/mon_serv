@@ -7,24 +7,24 @@
 
 <p>
   <b>5 Minutes</b><br />
-	<img src="/nodes/110432246001710/stats/ping.png?secs=300" />
+	<img src="/nodes/<%= @node.id %>/stats/ping.png?secs=300" />
 </p>
 
 <p>
   <b>1 Hour</b><br />
-	<img src="/nodes/110432246001710/stats/ping.png?secs=3600" />
+	<img src="/nodes/<%= @node.id %>/stats/ping.png?secs=3600" />
 </p>
 
 <p>
   <b>1 Day</b>
   <% secs_day = 24 * 3600 %><br />
-	<img src="/nodes/110432246001710/stats/ping.png?secs=<%= secs_day %>" />
+	<img src="/nodes/<%= @node.id %>/stats/ping.png?secs=<%= secs_day %>" />
 </p>
 
 <p>
   <% secs_week = 7 * 24 * 3600 %>
   <b>1 Week</b><br />
-	<img src="/nodes/110432246001710/stats/ping.png?secs=<%= secs_week %>" />
+	<img src="/nodes/<%= @node.id %>/stats/ping.png?secs=<%= secs_week %>" />
 </p>
 
 

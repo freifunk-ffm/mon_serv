@@ -39,7 +39,7 @@ class PingStat
         width width
         height height
         end_at Time.now
-        start_at end_time
+        start_at Time.now - end_time
         upper_limit 200
         lower_limit 0
         rigid true

@@ -24,7 +24,7 @@ class StatsController < ApplicationController
     #path = conf.rrd_path(params[:plugin],params[:name],cn)
     respond_to do |format|
       #format.rrd {send_file path, :type=>"application/rrd"}
-      format.png {send_data conf.ping_stat(cn).create_ping_graph(600,200,-secs), :type => 'image/png',:disposition => 'inline'}
+      format.png {send_data conf.ping_stat(cn).create_ping_graph(600,200,secs), :type => 'image/png',:disposition => 'inline'}
     end
   end
 end

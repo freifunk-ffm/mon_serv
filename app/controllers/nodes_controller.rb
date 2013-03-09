@@ -4,7 +4,13 @@ class NodesController < ApplicationController
   # GET /nodes.json
   def index
     @nodes = Node.all
-
+    @rtt = {}
+    conf = Collectd.new
+    @nodes.each do |node|
+      collectd_node = CollectdNode.new(node.id.to_s(16),node.link_local_address)
+      @rtt[node] = conf.ping_stat(collectd_node).rtt(Time.now - (24*3600))
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @nodes }

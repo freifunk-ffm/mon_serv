@@ -1,28 +1,39 @@
 require 'simplerrd'
+
 class PingStat
   include SimpleRRD
   
-  attr_accessor :conf
   attr_accessor :collectd_node
 
+  attr_accessor :drop_rrd
+  attr_accessor :rtt_rrd
+
   def initialize(collectd_node,conf)
-    self.conf = conf
-    self.collectd_node = collectd_node
+    base_prefix = conf['dir'] + "/ping/ping"
+    address_templ_str = conf['address']
+    node = collectd_node
+    address = ERB.new(address_templ_str).result(binding)
+    
+    self.drop_rrd = "#{base_prefix}_droprate-#{address}"
+    self.rtt_rrd = "#{base_prefix}-#{address}"
+    
   end
   
   def loss(time)
+    
   end
   
-  def rtt(time)
+  def rtt(end_time)
+    start = end_time.to_i
+    endt = Time.now.to_i
+    res = (endt - start).to_i
+    "rrdtool fetch #{self.rtt_rrd} --start #{start.to_s} --end #{endt.to_s} --resolution #{res.to_s} AVERAGE"
   end
   
   
   def create_ping_graph(width,height,end_time)
-      node = self.collectd_node
-      base_prefix = self.conf['dir'] + "/ping/ping"
-      address_templ_str = conf['address']
-      address = ERB.new(address_templ_str).result(binding)
-      
+      drop_rrd = self.drop_rrd
+      rtt_rrd = self.rtt_rrd
       graph = FancyGraph.build do
 #        title pingGDef.name if pingGDef.name
         width width
@@ -38,9 +49,9 @@ class PingStat
         y2_scale (100.0/200) # SCALE = 100%
         y2_shift 0
 
-        drops = Def.new(:rrdfile => "#{base_prefix}_droprate-#{address}", :ds_name => 'value', :cf => 'AVERAGE')
+        drops = Def.new(:rrdfile => drop_rrd, :ds_name => 'value', :cf => 'AVERAGE')
         drops_pct = CDef.new(:rpn_expression => [100, drops, '*'])
-        timing = Def.new(:rrdfile => "#{base_prefix}-#{address}", :ds_name=>'ping', :cf => 'AVERAGE')
+        timing = Def.new(:rrdfile => rtt_rrd, :ds_name=>'ping', :cf => 'AVERAGE')
 
         timing_99pct = VDef.new(:rpn_expression => [timing, 99, "PERCENT"])
         drops_99pct = VDef.new(:rpn_expression => [drops_pct, 99, "PERCENT"])

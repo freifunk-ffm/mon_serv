@@ -26,7 +26,7 @@ class PingStat
   def rtt(end_time)
     rrd = Errand.new(:filename => rtt_rrd)
     result = rrd.fetch(:start => (Time.now - 300).to_i.to_s) #5 min back
-    points = result[:data].select {|s| !s.nan?}
+    points = result[:data]["ping"].select {|s| !s.nan?}
     points.inject{ |sum, el| sum + el }.to_f / points.size
   end
   

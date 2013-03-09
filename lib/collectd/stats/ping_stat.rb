@@ -25,7 +25,7 @@ class PingStat
   
   def rtt(end_time)
     rrd = Errand.new(:filename => rtt_rrd)
-    rrd.fetch(:start => Time.now - 300) #5 min back
+    rrd.fetch(:start => (Time.now - 300).to_i.to_s) #5 min back
   end
   
   

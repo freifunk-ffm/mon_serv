@@ -1,9 +1,18 @@
 collectd:
+  reload_cmd: 'sudo /etc/init.d/collectd restart'
   stats:
     ping: #Configuration for ping-graphs
-      dir: '/var/lib/collectd/rrd/collecd.kbu.freifunk.net'
+      type: PingStat
+      dir: './rrd/collecd.kbu.freifunk.net'
       address: '<%= node.link_local %>%eth1.rrd'  
-  reload_cmd: 'sudo /etc/init.d/collectd restart'
+    interface: #Configuration for interface-graphs
+      type: InterfaceRxTxStat
+      dir: './rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/interface/'
+    error: #Configuration for interface-graphs
+      type: InterfaceErrorStat
+      dir: './rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/interface/'
+
+
   ping:
     template: '/srv/mon_serv/templates/ping.conf.erb'
     path: '/etc/collectd/mesh-conf/ping.conf'

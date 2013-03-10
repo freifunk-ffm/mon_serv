@@ -9,8 +9,8 @@ class NodesController < ApplicationController
     conf = Collectd.new
     @nodes.each do |node|
       collectd_node = CollectdNode.new(node.id.to_s(16),node.link_local_address)
-      @rtt[node] = conf.ping_stat(collectd_node).rtt_5_min
-      @loss[node] = conf.ping_stat(collectd_node).loss_5_min
+      #@rtt[node] = conf.ping_stat(collectd_node).rtt_5_min
+      #@loss[node] = conf.ping_stat(collectd_node).loss_5_min
     end
     
     respond_to do |format|

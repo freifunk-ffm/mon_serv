@@ -12,11 +12,14 @@
 <% @nodes.each do |node| %>
   <tr>
 	<td><%= node.id%></td>
-	<td><%= node.id.to_s(16)%></td>
+	<td><%= node.id_hex%></td>
 	<td><%= @rtt[node].inspect%></td>
 	<td><%= @loss[node].inspect%></td>
-	
-	<td><%= link_to 'Stats', node_path(node)%></td>
+	<td>
+		<%= link_to 'Ping', node_stat_path(node,'ping')%>
+		<%= link_to 'RX / TX', node_stat_path(node,'rxtx')%>
+		<%= link_to 'Errors', node_stat_path(node,'errors')%>
+	</td>
   </tr>
 <% end %>
 </table>

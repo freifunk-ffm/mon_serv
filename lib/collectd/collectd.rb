@@ -1,5 +1,5 @@
 require 'erb'
-# Serves as A FACTORY!
+# Serves as A FASCADE 
 class Collectd
   
   # For now, one collectd instance is supported, only
@@ -8,31 +8,12 @@ class Collectd
   
   end
   
-  #Stats
-  def ping_stat(collectd_node)
-    ps = PingStat.new(collectd_node,Collectd.config['stats']['ping'])
-    ps
+  # Factory-Method
+  def stat(collectd_node,type,name)
+    g_class = Collectd.config['stats'][type]['type'].constantize
+    stat = g_class.new(collectd_node,Collectd.config['stats'][type],name)
   end
-    
-  
-  
-  def supported_stats
-    res = []
-    Collectd.config['stats'].each_pair do |plugin,stanza|
-      stanza['names'].each do |name|
-        res << Stat.new(plugin,name)
-      end
-    end
-    res
-  end
-
-  def rrd_path(plugin,name,node)
-    template_str = Collectd.config['stats'][plugin]['path']
-    template = ERB.new template_str
-    Collectd.config['rrd_base'] + template.result(binding)
-  end
-
-  
+ 
   
   def set_ping_hosts(addresses)
     template_filename = Collectd.config['ping']['template']

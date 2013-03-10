@@ -17,16 +17,20 @@ class StatsController < ApplicationController
   
   def show
     conf = Collectd.new
-    node = Node.find(params[:node_id])
+    @node = Node.find(params[:node_id])
     secs = (params[:secs] || 3600).to_i
     name = params[:name]
+    type = params[:type]
+    id = params[:id] || params[:type]
     width = params[:width] || 600
     height = params[:height] || 200
-    cn = CollectdNode.new(node.id.to_s(16),node.link_local_address,)
-    #path = conf.rrd_path(params[:plugin],params[:name],cn)
+    cn = CollectdNode.new(@node.id_hex,@node.link_local_address)
     respond_to do |format|
-      #format.rrd {send_file path, :type=>"application/rrd"}
-      format.png {send_data conf.ping_stat(cn).create_ping_graph(width,height,secs), :type => 'image/png',:disposition => 'inline'}
+      format.png do 
+        stat = conf.stat(cn,id,name)
+        send_data stat.create_graph(width,height,secs), :type => 'image/png',:disposition => 'inline'
+      end
+      format.html { render action: id}
     end
   end
 end

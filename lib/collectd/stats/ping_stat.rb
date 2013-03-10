@@ -1,21 +1,22 @@
 require 'errand'
 
-class PingStat
+class PingStat < GraphBase
   include SimpleRRD
   
-  attr_accessor :collectd_node
 
   attr_accessor :drop_rrd
   attr_accessor :rtt_rrd
+  
 
-  def initialize(collectd_node,conf)
+  def initialize(node,conf,name)
+    super
     base_prefix = conf['dir'] + "/ping/ping"
-    address_templ_str = conf['address']
-    node = collectd_node
-    address = ERB.new(address_templ_str).result(binding)
+    address = conf_value(['address'])
     
     self.drop_rrd = "#{base_prefix}_droprate-#{address}"
     self.rtt_rrd = "#{base_prefix}-#{address}"
+    check_rrd_readable(self.drop_rrd)
+    check_rrd_readable(self.rtt_rrd)
     
   end
   
@@ -35,7 +36,7 @@ class PingStat
   end
   
   
-  def create_ping_graph(width,height,end_time)
+  def create_graph(width,height,end_time)
       drop_rrd = self.drop_rrd
       rtt_rrd = self.rtt_rrd
       graph = FancyGraph.build do
@@ -60,11 +61,11 @@ class PingStat
         timing_99pct = VDef.new(:rpn_expression => [timing, 99, "PERCENT"])
         drops_99pct = VDef.new(:rpn_expression => [drops_pct, 99, "PERCENT"])
 
-        timing_color = "FF7F00" #Orage
+        timing_color = "FF7F00" #Orange
         timing_line = Line.new(:data => timing, :text => "Ping RTT (ms) ", :width => 1, :color => timing_color)
         timing_area = Area.new(:data => timing, :color => timing_color, :alpha => '66')
 
-        drops_scaled = CDef.new(:rpn_expression => [drops, 400, "*"])
+        drops_scaled = CDef.new(:rpn_expression => [drops, 500, "*"])
 
         drops_color = "E31A1C" #Red
         drops_line = Line.new(:data => drops_scaled, :text => "Packet loss (%)", :width => 1, :color => drops_color)

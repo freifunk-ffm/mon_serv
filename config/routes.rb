@@ -5,7 +5,7 @@ MonServ::Application.routes.draw do
       post 'add_macs'
     end
   end
-  match 'nodes/:node_id/stats/:plugin/:name' => 'stats#show'
+  match 'nodes/:node_id/stats/:type/:name' => 'stats#show'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

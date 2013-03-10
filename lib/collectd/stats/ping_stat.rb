@@ -44,7 +44,7 @@ class PingStat
         height height
         end_at Time.now
         start_at Time.now - end_time
-        upper_limit 200
+        upper_limit 500
         lower_limit 0
         rigid true
         exponent 1

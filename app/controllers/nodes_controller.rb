@@ -18,7 +18,7 @@ class NodesController < ApplicationController
       format.json do 
         data = {}
         @nodes.each do |n| 
-          data[@nodes.id] = {id_hex: n.id_hex, loss_5_min: @loss[n], rtt_5_min: @rtt[n]}
+          data[n.id] = {id_hex: n.id_hex, loss_5_min: @loss[n], rtt_5_min: @rtt[n]}
         end
         render json: data
       end

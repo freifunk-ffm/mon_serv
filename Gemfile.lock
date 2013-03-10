@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/auxesis/errand.git
+  revision: 54a281085456be0dea28829dcd925c8c89eebae1
+  specs:
+    errand (0.8.0)
+      rrd-ffi (= 0.2.13)
+
+GIT
   remote: https://github.com/square/simplerrd.git
   revision: 408bda4f37169a95c41a10470b206a4d387ca58c
   specs:
@@ -47,6 +54,7 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    ffi (1.4.0)
     hike (1.2.1)
     i18n (0.6.4)
     journey (1.0.4)
@@ -89,6 +97,9 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.2)
+    rrd-ffi (0.2.13)
+      activesupport
+      ffi
     sass (3.2.7)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -119,6 +130,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby
   coffee-rails (~> 3.2.1)
+  errand!
   jquery-rails
   netaddr
   rails (= 3.2.12)

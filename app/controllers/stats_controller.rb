@@ -2,7 +2,7 @@ class StatsController < ApplicationController
   def index
     @node = Node.find(params[:node_id])
     conf = Collectd.new
-    collectd_node = CollectdNode.new(@node.link_local_address, @node.id.to_s(16))
+    collectd_node = CollectdNode.new(@node.link_local_address, @node.id_hex)
     @stats = conf.supported_stats    
     
     respond_to do |format|

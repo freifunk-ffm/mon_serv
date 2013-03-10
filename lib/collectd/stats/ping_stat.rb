@@ -50,7 +50,7 @@ class PingStat
         exponent 1
         y_label "ms"
         y2_label "% loss"
-        y2_scale (100.0/200) # SCALE = 100%
+        y2_scale (100.0/500) # SCALE = 100%
         y2_shift 0
 
         drops = Def.new(:rrdfile => drop_rrd, :ds_name => 'value', :cf => 'AVERAGE')

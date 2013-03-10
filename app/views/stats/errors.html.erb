@@ -1,0 +1,26 @@
+<p>
+  <b>Node-ID</b>
+  <%= @node.id.to_s(16) %>
+</p>
+<%
+	defs = {
+		"5 Minutes" => 600,
+		"1 Hour " => 3600,
+		"1 Day" => 24 * 3600,
+		"1 Week" => 7 * 24 * 3600,
+		"1 Year" => 365 * 24 * 3600
+	}
+%>
+
+<% for if_name in ['br-wan','wlan0-1'] do%>
+<h2><%= if_name%></h2>
+<% defs.each_pair do |name,interval| %>
+<p>
+  <b><%= name %></b><br />
+	<img src="/nodes/<%= @node.id %>/stats/error/<%=if_name%>.png?secs=<%=interval%>&width=400&height=150" />
+	<img src="/nodes/<%= @node.id %>/stats/error/<%=if_name%>.png?secs=<%=interval%>&width=400&height=150" />
+
+</p>
+
+<% end %>
+<% end %>

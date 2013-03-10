@@ -18,8 +18,8 @@ class NodesController < ApplicationController
       format.json do render json: @nodes.map {|n| 
         {:id => n.id, 
           :node_id => n.id.to_s(16),
-          :loss_5_min => @loss[node],
-          :rtt_5_min => @rtt[node]}  
+          :loss_5_min => @loss[n],
+          :rtt_5_min => @rtt[n]}  
         } 
       end
     end

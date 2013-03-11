@@ -22,7 +22,7 @@ class NodesController < ApplicationController
       format.json do 
         data = {}
         @nodes.each do |n| 
-          data[n.id] = {id_hex: n.id_hex.to_i, 
+          data[n.id] = {id_hex: n.id_hex, 
             loss_5_min: (@loss[n].nan?) ? nil : @loss[n], 
             rtt_5_min: (@rtt[n].nan?) ? nil : @rtt[n]}
         end

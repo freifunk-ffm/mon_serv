@@ -9,7 +9,7 @@ class Node < ActiveRecord::Base
   end
   
   def update_collectd
-    conf = CollectdConfig.new
+    conf = Collectd.new
     conf.set_ping_hosts(Node.all.map(&:link_local_address))
   end
   

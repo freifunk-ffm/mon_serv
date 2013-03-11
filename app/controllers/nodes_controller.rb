@@ -100,7 +100,11 @@ class NodesController < ApplicationController
   
   ## Add macs, if not existing
   def add_macs
-     params[:mac].each do |mac_str|
+     macs = params[:mac]
+     if macs.is_a?(String)
+      macs = [macs]
+     end
+     macs.each do |mac_str|
      mac = mac_str.to_i(16)
      unless Node.find_by_id(mac)
        n = Node.new

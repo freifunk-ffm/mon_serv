@@ -17,7 +17,7 @@ class StatsController < ApplicationController
           current = result[:fstart].to_i + (index * interval)
           data[node.id] << [current,(res.nan?) ? nil : res]
         end if result[:step]
-      rescue Execption =>
+      rescue Execption => e
         loggger.warn "Data for #{node.id} is missing #{e}"
       end
     end

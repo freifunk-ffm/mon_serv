@@ -26,7 +26,7 @@ class PingStat < GraphBase
       "--start", start_t.to_s, 
       "--end", end_t.to_s, 
       "--resolution", interval.to_s,"AVERAGE")
-    data
+    {fstart: fstart, fend: fend, data: data, step: step}
   end
   
   def loss_5_min

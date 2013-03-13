@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
@@ -41,4 +42,4 @@ gem 'netaddr'
 gem 'therubyracer'
 gem 'simplerrd', :git => 'https://github.com/square/simplerrd.git'
 gem 'errand', :git => 'https://github.com/auxesis/errand.git'
-gem 'RRD'
+#gem 'RRD'

@@ -12,7 +12,7 @@ class StatsController < ApplicationController
       data[node.id] = stat.all_stats(start_t,end_t,interval)
     end
     respond_to do |format|
-      format.json {json: data.to_json}
+      format.json {render json: data.to_json}
     end
   end
   

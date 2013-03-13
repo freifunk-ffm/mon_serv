@@ -9,12 +9,16 @@ class StatsController < ApplicationController
     Node.all.each do |node|
       collectd_node = CollectdNode.new(node.id_hex,node.link_local_address)
       stat = conf.stat(collectd_node,"ping",nil)
-      result = stat.all_stats(start_t,end_t,interval)
-      index = 0
-      data[node.id] = []
-      result[:steps].each do |res|
-        current = result[:fstart].to_i + (index * interval)
-        data[node.id] << [current,res]
+      begin 
+        result = stat.all_stats(start_t,end_t,interval)
+        index = 0
+        data[node.id] = []
+        result[:step].each do |res|
+          current = result[:fstart].to_i + (index * interval)
+          data[node.id] << [current,(res.nan?) ? nil : res]
+        end if result[:step]
+      rescue Execption =>
+        loggger.warn "Data for #{node.id} is missing #{e}"
       end
     end
     respond_to do |format|

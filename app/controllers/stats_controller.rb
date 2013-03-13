@@ -18,7 +18,7 @@ class StatsController < ApplicationController
           data[node.id] << [current,(res.nan?) ? nil : res]
         end if result[:step]
       rescue Exception => e
-        loggger.warn "Data for #{node.id} is missing #{e}"
+        logger.warn "Data for #{node.id} is missing - #{e}"
       end
     end
     respond_to do |format|

@@ -1,4 +1,5 @@
 require 'errand'
+require "RRD"
 
 class PingStat < GraphBase
   include SimpleRRD
@@ -18,6 +19,14 @@ class PingStat < GraphBase
     check_rrd_readable(self.drop_rrd)
     check_rrd_readable(self.rtt_rrd)
     
+  end
+  
+  def all_stats(start_t,end_t,interval)
+    (fstart, fend, data, step) = RRD.fetch(self.rtt_rrd, 
+      "--start", start_t.to_s, 
+      "--end", end_t.to_s, 
+      "--resolution", interval.to_s,"AVERAGE")
+    data
   end
   
   def loss_5_min

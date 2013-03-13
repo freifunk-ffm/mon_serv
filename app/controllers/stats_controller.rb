@@ -1,4 +1,21 @@
 class StatsController < ApplicationController
+  
+  def all_nodes
+    start_t = (params[:start] || -60).to_i
+    end_t = (params[:end] || Time.now).to_i
+    interval = (params[:interval] || 15).to_i
+    conf = Collectd.new
+    data = {}
+    Node.all.each do |node|
+      collectd_node = CollectdNode.new(node.id_hex,node.link_local_address)
+      stat = conf.stat(collectd_node,"ping",nil)
+      data[node.id] = stat.all_stats(start_t,end_t,interval)
+    end
+    respond_to do |format|
+      format.json {json: data.to_json}
+    end
+  end
+  
   def index
     @node = Node.find(params[:node_id])
     conf = Collectd.new

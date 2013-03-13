@@ -15,7 +15,7 @@ class StatsController < ApplicationController
         data[node.id] = []
         result[:step].each do |res|
           current = result[:fstart].to_i + (index * interval)
-          data[node.id] << [current,(res.nan?) ? nil : res]
+          data[node.id] << [current,(res.first..nan?) ? nil : res.first]
         end if result[:step]
       rescue Exception => e
         logger.warn "Data for #{node.id} is missing - #{e}"

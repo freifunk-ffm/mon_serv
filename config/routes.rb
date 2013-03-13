@@ -7,6 +7,11 @@ MonServ::Application.routes.draw do
   end
   match 'nodes/:node_id/stats/:type/:name' => 'stats#show'
   
+  resource :stats do
+    collection do
+      get 'all_nodes'
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

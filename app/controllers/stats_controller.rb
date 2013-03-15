@@ -8,7 +8,7 @@ class StatsController < ApplicationController
     data = {}
     node_scope = Node.scoped
     if node_id = params[:node_id]
-      node_scope.where(id: node_id)
+      node_scope = node_scope.where(id: node_id)
     end
 
     node_scope.each do |node|

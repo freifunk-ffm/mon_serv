@@ -1,12 +1,17 @@
 class StatsController < ApplicationController
   
-  def all_nodes
+  def ping
     start_t = (params[:start] || -60).to_i
     end_t = (params[:end] || Time.now).to_i
     interval = (params[:interval] || 15).to_i
     conf = Collectd.new
     data = {}
-    Node.all.each do |node|
+    node_scope = Node.scoped
+    if node_id = params[:node_id]
+      node_scope.where(id: node_id)
+    end
+
+    node_scope.each do |node|
       collectd_node = CollectdNode.new(node.id_hex,node.link_local_address)
       stat = conf.stat(collectd_node,"ping",nil)
       begin 

@@ -9,7 +9,7 @@ MonServ::Application.routes.draw do
   
   resource :stats do
     collection do
-      get 'all_nodes'
+      get 'ping'
     end
   end
   # The priority is based upon order of creation:

@@ -85,14 +85,14 @@ class PingStat < GraphBase
         summary_elements(timing).each { |e| add_element(e) } unless no_summary
         timing_99text = GPrint.new(:value => timing_99pct, :text => "99%%: %8.2lf%S")
         add_element(timing_99text) unless no_summary
-        add_element(line_break) 
+        add_element(line_break) unless no_summary
 
         add_element(drops_line)
         add_element(drops_area)
         summary_elements(drops_pct).each { |e| add_element(e) } unless no_summary
         drops_99text = GPrint.new(:value => drops_99pct, :text => "99%%: %8.2lf%S")
         add_element(drops_99text) unless no_summary
-        add_element(line_break) 
+        add_element(line_break) unless no_summary
       end
       graph.generate
   end

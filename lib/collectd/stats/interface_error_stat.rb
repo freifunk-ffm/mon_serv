@@ -32,7 +32,7 @@ class InterfaceErrorStat < GraphBase
         add_element(tx_area)
         summary_elements(tx_data).each { |e| add_element(e) } unless no_summary
  
-        add_element(line_break) 
+        add_element(line_break) unless no_summary
  
         # RX
         rx_data = Def.new(:rrdfile => rrd_file, :ds_name=>'rx', :cf => 'AVERAGE')

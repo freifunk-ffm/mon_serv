@@ -17,7 +17,7 @@ class StatsController < ApplicationController
       stat = conf.stat(collectd_node,"ping",nil)
       begin 
         result = stat.all_stats(start_t,end_t,interval)
-        index = 0
+        index = interval # not = 0 - to avoid off by one error
         data[node.id] = []
         result[:step].each do |res|
           current = result[:fstart].to_i + (index * interval)

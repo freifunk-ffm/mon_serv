@@ -3,7 +3,7 @@ class StatsController < ApplicationController
   def ping
     start_t = (params[:start] || -60).to_i
     interval = (params[:interval] || 10).to_i
-    end_t = (params[:end] || Time.now).to_i
+    end_t = ((params[:end] || Time.now).to_i / 10) * 10
 
     conf = Collectd.new
     data = {}
@@ -17,7 +17,7 @@ class StatsController < ApplicationController
       stat = conf.stat(collectd_node,"ping",nil)
       begin 
         result = stat.all_stats(start_t,end_t,interval)
-        index = interval # not = 0 - to avoid off by one error
+        index = 1 # Not 0! -> = 0 will introduce off by one error, since starting at f_start means, the that first value is available at start+interval
         data[node.id] = []
         result[:step].each do |res|
           current = result[:fstart].to_i + (index * interval)

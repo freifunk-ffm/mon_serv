@@ -13,7 +13,7 @@ class InterfaceErrorStat < GraphBase
   end
 
   
-  def create_graph(w,h,end_time)
+  def create_graph(w,h,end_time,no_summary)
       graph_name = self.graph_name
       rrd_file = self.rrd_file
       graph = FancyGraph.build do
@@ -30,7 +30,7 @@ class InterfaceErrorStat < GraphBase
         tx_area = Area.new(:data => tx_data, :color => tx_color, :alpha => '66')
         add_element(tx_line)
         add_element(tx_area)
-        summary_elements(tx_data).each { |e| add_element(e) }
+        summary_elements(tx_data).each { |e| add_element(e) } unless no_summary
  
         add_element(line_break) 
  
@@ -43,7 +43,7 @@ class InterfaceErrorStat < GraphBase
         rx_area = Area.new(:data => rx_minus, :color => rx_color, :alpha => '66')
         add_element(rx_line)
         add_element(rx_area)
-        summary_elements(rx_data).each { |e| add_element(e) }
+        summary_elements(rx_data).each { |e| add_element(e) } unless no_summary
  
         
  

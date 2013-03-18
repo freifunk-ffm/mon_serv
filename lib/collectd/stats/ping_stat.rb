@@ -45,7 +45,7 @@ class PingStat < GraphBase
   end
   
   
-  def create_graph(width,height,end_time)
+  def create_graph(width,height,end_time,no_summary)
       drop_rrd = self.drop_rrd
       rtt_rrd = self.rtt_rrd
       graph = FancyGraph.build do
@@ -82,16 +82,16 @@ class PingStat < GraphBase
 
         add_element(timing_line)
         add_element(timing_area)
-        summary_elements(timing).each { |e| add_element(e) } 
+        summary_elements(timing).each { |e| add_element(e) } unless no_summary
         timing_99text = GPrint.new(:value => timing_99pct, :text => "99%%: %8.2lf%S")
-        #add_element(timing_99text) 
+        add_element(timing_99text) unless no_summary
         add_element(line_break) 
 
         add_element(drops_line)
         add_element(drops_area)
-        summary_elements(drops_pct).each { |e| add_element(e) } 
+        summary_elements(drops_pct).each { |e| add_element(e) } unless no_summary
         drops_99text = GPrint.new(:value => drops_99pct, :text => "99%%: %8.2lf%S")
-        #add_element(drops_99text) 
+        add_element(drops_99text) unless no_summary
         add_element(line_break) 
       end
       graph.generate

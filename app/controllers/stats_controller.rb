@@ -2,8 +2,9 @@ class StatsController < ApplicationController
   
   def ping
     start_t = (params[:start] || -60).to_i
-    end_t = (params[:end] || Time.now).to_i
-    interval = (params[:interval] || 15).to_i
+    interval = (params[:interval] || 10).to_i
+    end_t = (params[:end] || Time.now).to_i / 10 * 10
+
     conf = Collectd.new
     data = {}
     node_scope = Node.scoped

@@ -11,6 +11,14 @@ class Node < ActiveRecord::Base
   def update_collectd
     conf = Collectd.new
     conf.set_ping_hosts(Node.all.map(&:link_local_address))
+    # Set mac-Adresses
+    macs_by_ll = {}
+    
+    Node.all.each do |node|
+      macs_by_ll[node.link_local_address] = NetAddr::EUI48.new(self.id).address(:Delimiter => ':')
+    end
+    conf.write_mac_list macs_by_ll
+    
   end
   
   def link_local_address

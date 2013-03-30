@@ -16,4 +16,4 @@ collectd:
   ping:
     template: '/srv/mon_serv/templates/ping.conf.erb'
     path: '/etc/collectd/mesh-conf/ping.conf'
-    
+    interface: 'eth1'

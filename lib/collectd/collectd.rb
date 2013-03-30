@@ -29,6 +29,15 @@ class Collectd
     system Collectd.config['reload_cmd'] #Execute reload
   end
 
+  # Hardwire all MACs in order to avoid NS-pacekts
+  def write_mac_list(macs_by_ll)
+    macs_by_ll.each_pair do |ll,mac|
+      i_face = Collectd.config['interface']
+      # ip -6 neigh add fec0::1 lladdr 02:01:02:03:04:05 dev eth0
+      system "ip -6 neigh add #{ll} lladdr #{mac} dev #{i_face}"
+    end
+  end
+
   private
   def self.config
     @@collectd_conf ||= YAML::load_file("#{Rails.root}/config/app.yml")['collectd']

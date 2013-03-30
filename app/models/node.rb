@@ -15,7 +15,7 @@ class Node < ActiveRecord::Base
     macs_by_ll = {}
     
     Node.all.each do |node|
-      macs_by_ll[node.link_local_address] = NetAddr::EUI48.new(self.id).address(:Delimiter => ':')
+      macs_by_ll[node.link_local_address] = NetAddr::EUI48.new(node.id).address(:Delimiter => ':')
     end
     conf.write_mac_list macs_by_ll
     

@@ -35,6 +35,9 @@ class Collectd
       i_face = Collectd.config['ping']['interface']
       # ip -6 neigh add fec0::1 lladdr 02:01:02:03:04:05 dev eth0
       system "sudo /sbin/ip -6 neigh add #{ll} lladdr #{mac} dev #{i_face}"
+      # May exists - try change
+      system "sudo /sbin/ip -6 neigh change #{ll} lladdr #{mac} dev #{i_face}"
+
     end
   end
 

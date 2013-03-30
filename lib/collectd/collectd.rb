@@ -34,7 +34,7 @@ class Collectd
     macs_by_ll.each_pair do |ll,mac|
       i_face = Collectd.config['ping']['interface']
       # ip -6 neigh add fec0::1 lladdr 02:01:02:03:04:05 dev eth0
-      system "sudo ip -6 neigh add #{ll} lladdr #{mac} dev #{i_face}"
+      system "sudo /sbin/ip -6 neigh add #{ll} lladdr #{mac} dev #{i_face}"
     end
   end
 

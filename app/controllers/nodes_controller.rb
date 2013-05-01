@@ -23,8 +23,8 @@ class NodesController < ApplicationController
         data = {}
         @nodes.each do |n| 
           data[n.id] = {id_hex: n.id_hex, 
-            loss_5_min: (@loss[n].nan?) ? nil : @loss[n], 
-            rtt_5_min: (@rtt[n].nan?) ? nil : @rtt[n]}
+            loss_5_min: (@loss[n].nil? || @loss[n].nan?) ? nil : @loss[n], 
+            rtt_5_min: (@loss[n].nil? || @rtt[n].nan?) ? nil : @rtt[n]}
         end
         render json: data
       end

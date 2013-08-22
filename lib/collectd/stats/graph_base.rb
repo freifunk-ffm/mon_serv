@@ -5,7 +5,7 @@ class GraphBase
   attr_accessor :node
   attr_accessor :name
 
-  def initialize(node,conf,name)
+  def initialize(node,conf,name,stat_params)
     self.conf = conf
     self.node = node
     self.name = name

@@ -7,11 +7,25 @@ class NodesController < ApplicationController
     @rtt = {}
     @loss = {}
     conf = Collectd.new
+    @iface_names = {}
+    @iface_stats = {}
+    
     @nodes.each do |node|
       collectd_node = CollectdNode.new(node.id.to_s(16),node.link_local_address)
       begin
-        @rtt[node] = conf.stat(collectd_node,"ping",nil).rtt_5_min
-        @loss[node] = conf.stat(collectd_node,"ping",nil).loss_5_min
+	# Stations stat
+	iwstat = conf.stat(collectd_node,"iwinfo",nil,nil)
+	@iface_names[node] = iwstat.interfaces
+	@iface_stats[node] = @iface_names[node].map do |name|
+	  c_stat = conf.stat(collectd_node,"iwinfo",nil, nil)
+	  c_stat.current_interface = name
+	  c_stat
+	end
+        logger.info "DS-Name: #{conf.stat(collectd_node,"ping",nil,nil).ping_ds_name}"
+	# Ping stat
+	@rtt[node] = conf.stat(collectd_node,"ping",nil,nil).rtt_5_min
+        @loss[node] = conf.stat(collectd_node,"ping",nil,nil).loss_5_min
+
       rescue Exception => e #Ignore errors in single hosts (-> missing rrd-Files for newly created ...)
         logger.error "Unable to calculate stats: #{e}"
       end

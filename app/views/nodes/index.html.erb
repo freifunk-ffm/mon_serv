@@ -6,6 +6,7 @@
 	<th>Node-ID</th>
 	<th>RTT</th>
 	<th>Loss</th>
+	<th>Stations<th>
     <th></th>
   </tr>
 
@@ -16,9 +17,25 @@
 	<td><%= @rtt[node].inspect%></td>
 	<td><%= @loss[node].inspect%></td>
 	<td>
+	<table>
+	  <tr>
+	    <td>&nbsp;</td><td>now</td><td>AVG 1d</td><td>AVG 30d</td>
+	  </tr>
+	  <% for i_stat in @iface_stats[node] do %>
+	    <tr>
+	      <td>Name: <%=i_stat.iface_name %></td>
+	      <td><%=i_stat.stations_now%></td>
+	      <td><%=i_stat.stations_1d%></td>
+	      <td><%=i_stat.stations_30d%></td>
+	    </tr>
+	  <% end if @iface_stats[node]%>
+	</table>
+	</td>
+	<td>
 		<%= link_to 'Ping', node_stat_path(node,'ping')%>
 		<%= link_to 'RX / TX', node_stat_path(node,'rxtx')%>
 		<%= link_to 'Errors', node_stat_path(node,'errors')%>
+		<%= link_to 'iwinfo', node_stat_path(node,'iwinfo')%>
 	</td>
   </tr>
 <% end %>

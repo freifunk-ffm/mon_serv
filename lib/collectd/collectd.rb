@@ -9,9 +9,9 @@ class Collectd
   end
   
   # Factory-Method
-  def stat(collectd_node,type,name)
+  def stat(collectd_node,type,name,stat_params)
     g_class = Collectd.config['stats'][type]['type'].constantize
-    stat = g_class.new(collectd_node,Collectd.config['stats'][type],name)
+    stat = g_class.new(collectd_node,Collectd.config['stats'][type],name,stat_params)
   end
  
   

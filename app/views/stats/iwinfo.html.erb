@@ -1,0 +1,32 @@
+<p>
+  <b>Node-ID</b>
+  <%= @node.id.to_s(16) %>
+</p>
+<%
+	defs = {
+		"5 Minutes" => 600,
+		"1 Hour " => 3600,
+		"1 Day" => 24 * 3600,
+		"1 Week" => 7 * 24 * 3600,
+		"1 Year" => 365 * 24 * 3600
+	}
+%>
+Interfaces: <%= @stat.interfaces %><br />
+Stations: <br />
+
+
+<% for iface in @stat.interfaces do %>
+<h2><%= iface %></h2>
+<% @stat.current_interface = iface %>
+Now: <%= @stat.stations_now%>
+1d: <%= @stat.stations_1d%>
+30d: <%= @stat.stations_30d%>
+
+
+<% defs.each_pair do |name,interval| %>
+<p>
+  <b><%= name %></b><br />
+  <img src="/nodes/<%= @node.id %>/stats/iwinfo.png?&stat[iface]=<%=iface%>&secs=<%=interval%>&width=600&height=200" />
+</p>
+<% end %>
+<% end %>

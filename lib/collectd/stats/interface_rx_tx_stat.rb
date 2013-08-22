@@ -15,7 +15,7 @@ class InterfaceRxTxStat < GraphBase
     
   }
 
-  def initialize(node,conf,name)
+  def initialize(node,conf,name,stat_params)
     super
     self.graph_name = name.split('-')[0]
     self.interface_name = name.split('-')[1..-1].join('-')

@@ -11,9 +11,11 @@ collectd:
     error: #Configuration for interface-graphs
       type: InterfaceErrorStat
       dir: './rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/interface/'
-
+    iwinfo:
+      type: WirelessStat
+      dir: './rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/iwinfo/'
 
   ping:
-    template: '/srv/mon_serv/templates/ping.conf.erb'
+    template: './templates/ping.conf.erb'
     path: '/etc/collectd/mesh-conf/ping.conf'
     interface: 'eth1'

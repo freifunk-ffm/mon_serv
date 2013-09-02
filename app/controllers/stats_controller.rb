@@ -42,7 +42,7 @@ class StatsController < ApplicationController
         stations: {}
       }
       begin
-        result[:ping] = conf.stat(n.to_collectd_node,'ping',nil,nil).summary 
+        result[n.id_hex][:ping] = conf.stat(n.to_collectd_node,'ping',nil,nil).summary 
       rescue Exception => e
         logger.warn "Unable to build ping statistics for #{n.inspect}: #{e.inspect}"
       end

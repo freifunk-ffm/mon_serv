@@ -16,12 +16,15 @@ class IwinfoStat < GraphBase
     self.stations_rrd = "#{self.base_dir}/iwinfo-#{stat_params['iface']}/stations.rrd" if stat_params && stat_params['iface']
   end
 
-  def current_interface=(ifname)
-    self.iface_name = ifname
-    self.stations_rrd = "#{self.base_dir}/iwinfo-#{ifname}/stations.rrd"
-    check_rrd_readable(self.stations_rrd)
+  def summary
+    {
+      stations_now: self.stations_now,
+      stations_1d: self.stations_1d,
+      stations_30d: self.stations_30d
+    }
   end
-  
+
+
   def stations_now
     rrd = Errand.new(:filename => self.stations_rrd)
     result = rrd.fetch(:start => (Time.now - 60).to_i.to_s) #1 min back
@@ -72,9 +75,10 @@ class IwinfoStat < GraphBase
       end
       graph.generate
   end 
-  def interfaces
-    Dir["#{self.base_dir}/iwinfo-*"].map do |str|
-	str.split('iwinfo-')[-1]
+  def self.interfaces(node)
+    base_dir = GraphBase.conf_value_stat(['stats','iwinfo','dir'],node)
+    Dir["#{base_dir}/iwinfo-*"].map do |str|
+	   str.split('iwinfo-')[-1]
     end
   end
   

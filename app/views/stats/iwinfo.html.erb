@@ -1,0 +1,27 @@
+<p>
+  <b>Node-ID</b>
+  <%= @node.id.to_s(16) %><br />
+  Stations now: <%= @stat.stations_now %><br />
+  Stations 1 day (avg): <%= @stat.stations_1d %> <br />
+  Stations 30 day (avg): <%= @stat.stations_30d %> <br />
+
+
+</p>
+<%
+	defs = {
+		"5 Minutes" => 600,
+		"1 Hour " => 3600,
+		"1 Day" => 24 * 3600,
+		"1 Week" => 7 * 24 * 3600,
+		"1 Year" => 365 * 24 * 3600
+	}
+%>
+
+
+<% defs.each_pair do |name,interval| %>
+<p>
+  <b><%= name %></b><br />
+	<img src="/nodes/<%= @node.id %>/stats/iwinfo.png?secs=<%=interval%>&width=600&height=200&stat[iface]=<%= @stat_params['iface'] %>" />
+</p>
+
+<% end %>

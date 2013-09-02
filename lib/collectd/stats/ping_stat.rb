@@ -29,6 +29,12 @@ class PingStat < GraphBase
     {fstart: fstart, fend: fend, data: data, step: step}
   end
   
+  def summary
+    {
+      loss_5_min: self.loss_5_min,
+      rtt_5_min: self.rtt_5_min
+    }
+  end
 
   # Early collectd: ping
   # Later collectd: value

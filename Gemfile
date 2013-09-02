@@ -43,3 +43,8 @@ gem 'therubyracer'
 gem 'simplerrd', :git => 'https://github.com/square/simplerrd.git'
 gem 'errand', :git => 'https://github.com/auxesis/errand.git'
 gem 'librrd', :git => 'git://github.com/auxesis/librrd-ruby.git'
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+end

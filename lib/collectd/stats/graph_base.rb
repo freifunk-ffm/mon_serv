@@ -17,9 +17,20 @@ class GraphBase
     raise "Cannot open #{name} for read" unless File.readable?(name)
   end
 
+  # void by default - to be overriden for json-summaries
+  def summary; end
+
   def conf_value(key_path)
     node = self.node
     value = self.conf
+    key_path.each do |key|
+      value = value[key]
+    end
+    ERB.new(value).result(binding)
+  end
+
+  def self.conf_value_stat(key_path,node)
+    value = Collectd.config
     key_path.each do |key|
       value = value[key]
     end

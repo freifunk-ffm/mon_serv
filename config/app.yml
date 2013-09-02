@@ -13,7 +13,7 @@ collectd:
       dir: '/home/jan/git/mon_serv/db/rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/interface/'
     iwinfo:
       type: IwinfoStat
-      dir: '/home/jan/git/mon_serv/db/rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/iwinfo/'
+      dir: '/home/jan/git/mon_serv/db/rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/'
 
   ping:
     template: './templates/ping.conf.erb'

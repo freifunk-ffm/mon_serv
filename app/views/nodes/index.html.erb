@@ -6,6 +6,7 @@
 	<th>Node-ID</th>
 	<th>RTT</th>
 	<th>Loss</th>
+	<th>Iwinfo-Interfacey</th>
     <th></th>
   </tr>
 
@@ -16,9 +17,17 @@
 	<td><%= @rtt[node].inspect%></td>
 	<td><%= @loss[node].inspect%></td>
 	<td>
+		<% for iface in IwinfoStat.interfaces(node.to_collectd_node) %>
+			<%= link_to iface, node_stat_path(node,'iwinfo', {'stat[iface]' => iface}) %>
+			<%#= iface %>
+		<% end %> 
+
+	</td>
+	<td>
 		<%= link_to 'Ping', node_stat_path(node,'ping')%>
 		<%= link_to 'RX / TX', node_stat_path(node,'rxtx')%>
 		<%= link_to 'Errors', node_stat_path(node,'errors')%>
+
 	</td>
   </tr>
 <% end %>

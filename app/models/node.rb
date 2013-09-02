@@ -25,4 +25,8 @@ class Node < ActiveRecord::Base
     NetAddr::EUI48.new(self.id).link_local
   end
 
+  def to_collectd_node
+    CollectdNode.new(self.id_hex,self.link_local_address)
+  end
+
 end

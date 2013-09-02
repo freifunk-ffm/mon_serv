@@ -29,6 +29,8 @@ class Collectd
     system Collectd.config['reload_cmd'] #Execute reload
   end
 
+
+
   # Hardwire all MACs in order to avoid NS-pacekts
   def write_mac_list(macs_by_ll)
     macs_by_ll.each_pair do |ll,mac|
@@ -41,9 +43,8 @@ class Collectd
     end
   end
 
-  private
   def self.config
-    @@collectd_conf ||= YAML::load_file("#{Rails.root}/config/app.yml")['collectd']
+    @@config ||= YAML::load_file("#{Rails.root}/config/app.yml")['collectd']
   end
   
 end

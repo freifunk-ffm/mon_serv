@@ -10,8 +10,8 @@ class NodesController < ApplicationController
     @nodes.each do |node|
       collectd_node = CollectdNode.new(node.id.to_s(16),node.link_local_address)
       begin
-        @rtt[node] = conf.stat(collectd_node,"ping",nil).rtt_5_min
-        @loss[node] = conf.stat(collectd_node,"ping",nil).loss_5_min
+        @rtt[node] = conf.stat(collectd_node,"ping",nil,nil).rtt_5_min
+        @loss[node] = conf.stat(collectd_node,"ping",nil,nil).loss_5_min
       rescue Exception => e #Ignore errors in single hosts (-> missing rrd-Files for newly created ...)
         logger.error "Unable to calculate stats: #{e}"
       end

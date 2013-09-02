@@ -1,17 +1,20 @@
 MonServ::Application.routes.draw do
+  resource :stats do
+    collection do
+      get 'ping'
+      get 'all'
+    end
+  end
+
   resources :nodes do
     resources :stats
     collection do
       post 'add_macs'
     end
   end
-  match 'nodes/:node_id/stats/:type/:name' => 'stats#show'
   
-  resource :stats do
-    collection do
-      get 'ping'
-    end
-  end
+  match 'nodes/:node_id/stats/:type/:name' => 'stats#show'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -24,9 +27,9 @@ MonServ::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  #   resources :Sample
 
-  # Sample resource route with options:
+  # products resource route with options:
   #   resources :products do
   #     member do
   #       get 'short'

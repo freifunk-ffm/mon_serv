@@ -59,10 +59,11 @@ class StatsController < ApplicationController
     width = params[:width] || 600
     height = params[:height] || 200
     no_summary = params[:no_summary]
+    stat_params = params[:stat]
     cn = CollectdNode.new(@node.id_hex,@node.link_local_address)
     respond_to do |format|
       format.png do 
-        stat = conf.stat(cn,id,name)
+        stat = conf.stat(cn,id,name,stat_params)
         send_data stat.create_graph(width,height,secs,no_summary), :type => 'image/png',:disposition => 'inline'
       end
       format.html { render action: id}

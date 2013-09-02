@@ -5,7 +5,7 @@ class InterfaceErrorStat < GraphBase
   attr_accessor :graph_name
   attr_accessor :rrd_file
 
-  def initialize(node,conf,name)
+  def initialize(node,conf,name,stat_params)
     super
     dir = conf_value(["dir"])
     self.rrd_file = "#{dir}/if_errors-#{self.name}.rrd"

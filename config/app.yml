@@ -3,17 +3,19 @@ collectd:
   stats:
     ping: #Configuration for ping-graphs
       type: PingStat
-      dir: './rrd/collecd.kbu.freifunk.net'
+      dir: '/home/jan/git/mon_serv/db/rrd/collecd.kbu.freifunk.net'
       address: '<%= node.link_local %>%eth1.rrd'  
     interface: #Configuration for interface-graphs
       type: InterfaceRxTxStat
-      dir: './rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/interface/'
+      dir: '/home/jan/git/mon_serv/db/rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/interface/'
     error: #Configuration for interface-graphs
       type: InterfaceErrorStat
-      dir: './rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/interface/'
-
+      dir: '/home/jan/git/mon_serv/db/rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/interface/'
+    iwinfo:
+      type: IwinfoStat
+      dir: '/home/jan/git/mon_serv/db/rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/iwinfo/'
 
   ping:
-    template: '/srv/mon_serv/templates/ping.conf.erb'
+    template: './templates/ping.conf.erb'
     path: '/etc/collectd/mesh-conf/ping.conf'
     interface: 'eth1'

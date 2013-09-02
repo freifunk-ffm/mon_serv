@@ -4,11 +4,13 @@ class GraphBase
   attr_accessor :conf
   attr_accessor :node
   attr_accessor :name
+  attr_accessor :stat_params
 
-  def initialize(node,conf,name)
+  def initialize(node,conf,name,stat_params)
     self.conf = conf
     self.node = node
     self.name = name
+    self.stat_params = stat_params
   end
   
   def check_rrd_readable(name)

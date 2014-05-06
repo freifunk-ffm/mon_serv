@@ -7,7 +7,8 @@ gem 'rails', '3.2.12'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-
+gem 'pg'
+gem 'activerecord-postgresql-adapter'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -42,7 +43,8 @@ gem 'netaddr'
 gem 'therubyracer'
 gem 'simplerrd', :git => 'https://github.com/square/simplerrd.git'
 gem 'errand', :git => 'https://github.com/auxesis/errand.git'
-gem 'librrd', :git => 'git://github.com/auxesis/librrd-ruby.git'
+# gem 'librrd', :git => 'git://github.com/auxesis/librrd-ruby.git'
+gem 'librrd'
 group :development do
   gem "better_errors"
 end

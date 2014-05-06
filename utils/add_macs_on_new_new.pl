@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 use strict;
 my $dir = '/var/lib/collectd/rrd';
-my $pattern = '(\w+)\.nodes\.kbu\.freifunk\.net';
+my $pattern = '(\w+)\.nodes\.ffm\.freifunk\.net';
 my $url = 'http://localhost/nodes/add_macs';
 
 

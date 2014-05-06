@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/auxesis/librrd-ruby.git
-  revision: c032df303e7038327e762ecf0fc9265afced9202
-  specs:
-    librrd (0.2.0)
-
-GIT
   remote: https://github.com/auxesis/errand.git
   revision: 54a281085456be0dea28829dcd925c8c89eebae1
   specs:
@@ -41,6 +35,8 @@ GEM
       activesupport (= 3.2.12)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
+    activerecord-postgresql-adapter (0.0.1)
+      pg
     activeresource (3.2.12)
       activemodel (= 3.2.12)
       activesupport (= 3.2.12)
@@ -49,7 +45,13 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    better_errors (1.1.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.0.4)
+    coderay (1.1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -57,6 +59,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.1)
+    debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -68,6 +71,7 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.7.7)
+    librrd (1.0.4)
     libv8 (3.11.8.13)
     mail (2.4.4)
       i18n (>= 0.4.0)
@@ -76,6 +80,7 @@ GEM
     mime-types (1.21)
     multi_json (1.6.1)
     netaddr (1.5.0)
+    pg (0.17.1)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -134,12 +139,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-postgresql-adapter
   bcrypt-ruby
+  better_errors
+  binding_of_caller
   coffee-rails (~> 3.2.1)
   errand!
   jquery-rails
-  librrd!
+  librrd
   netaddr
+  pg
   rails (= 3.2.12)
   sass-rails (~> 3.2.3)
   simplerrd!

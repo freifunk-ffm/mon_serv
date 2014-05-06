@@ -3,17 +3,17 @@ collectd:
   stats:
     ping: #Configuration for ping-graphs
       type: PingStat
-      dir: './rrd/collecd.kbu.freifunk.net'
+      dir: '/var/lib/collectd/rrd/stats.ffm.freifunk.net'
       address: '<%= node.link_local %>%eth1.rrd'  
     interface: #Configuration for interface-graphs
       type: InterfaceRxTxStat
-      dir: './rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/interface/'
+      dir: '/var/lib/collectd/rrd/<%= node.id_hex %>.nodes.ffm.freifunk.net/interface/'
     error: #Configuration for interface-graphs
       type: InterfaceErrorStat
-      dir: './rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/interface/'
+      dir: '/var/lib/collectd/rrd/<%= node.id_hex %>.nodes.ffm.freifunk.net/interface/'
     iwinfo:
-      type: WirelessStat
-      dir: './rrd/<%= node.id_hex %>.nodes.kbu.freifunk.net/iwinfo/'
+      type: IwinfoStat
+      dir: '/var/lib/collectd/rrd/<%= node.id_hex %>.nodes.ffm.freifunk.net/iwinfo/'
 
   ping:
     template: './templates/ping.conf.erb'

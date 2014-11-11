@@ -4,18 +4,22 @@ collectd:
     ping: #Configuration for ping-graphs
       type: PingStat
       dir: '/var/lib/collectd/rrd/stats.ffm.freifunk.net'
-      address: '<%= node.link_local %>%eth1.rrd'  
+      address: '<%= node.link_local %>%backbone-stats.rrd'  
+#    ping: #Configuration for ping-graphs
+#      type: PingStat
+#      dir: '/var/lib/collectd/rrd/freifunk-<%= node.id_hex%>'
+#      address: 'stats.bb6.ffm.freifunk.net.rrd'  
     interface: #Configuration for interface-graphs
       type: InterfaceRxTxStat
-      dir: '/var/lib/collectd/rrd/<%= node.id_hex %>.nodes.ffm.freifunk.net/interface/'
+      dir: '/var/lib/collectd/rrd/freifunk-<%= @node.id_hex%>/'
     error: #Configuration for interface-graphs
       type: InterfaceErrorStat
-      dir: '/var/lib/collectd/rrd/<%= node.id_hex %>.nodes.ffm.freifunk.net/interface/'
+      dir: '/var/lib/collectd/rrd/freifunk-<%= @node.id_hex%>/'
     iwinfo:
       type: IwinfoStat
-      dir: '/var/lib/collectd/rrd/<%= node.id_hex %>.nodes.ffm.freifunk.net/iwinfo/'
+      dir: '/var/lib/collectd/rrd/freifunk-<%= @node.id_hex%>/'
 
   ping:
     template: './templates/ping.conf.erb'
     path: '/etc/collectd/mesh-conf/ping.conf'
-    interface: 'eth1'
+    interface: 'backbone-stats'

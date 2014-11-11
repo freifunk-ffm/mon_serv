@@ -18,8 +18,18 @@ test:
   pool: 5
   timeout: 5000
 
+#production:
+#  adapter: sqlite3
+#  database: db/production.sqlite3
+#  pool: 5
+#  timeout: 5000
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 5
-  timeout: 5000
+    adapter: postgresql
+    encoding: utf8
+    reconnect: false
+    database: monserv
+    pool: 5
+    username: monserv
+    password: XXXXXX
+    host: db.bb.ffm.freifunk.net
+
